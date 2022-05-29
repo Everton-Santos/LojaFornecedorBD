@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class LojaControl {
-    private ObservableList<Loja> lojas = FXCollections.observableArrayList();
+    private ObservableList<Loja> loja = FXCollections.observableArrayList();
 
     private StringProperty nome = new SimpleStringProperty("");
     private ObjectProperty<LocalDate> data = new SimpleObjectProperty<>();
@@ -44,7 +44,7 @@ public class LojaControl {
 
         table.getColumns().addAll(col1, col2);
 
-        table.setItems(lojas);
+        table.setItems(loja);
     }
 
     public void adicionar() {
@@ -53,7 +53,7 @@ public class LojaControl {
         Loja e = new Loja();
         e.setNome(nome.get());
         e.setData(data.get());
-        lojas.add(e);
+        loja.add(e);
         dao.inserir(e);
     }
 
@@ -66,8 +66,8 @@ public class LojaControl {
 //            }
 //        }
         List<Loja> lista = dao.consultar(nome.get());
-        lojas.clear();
-        lojas.addAll(lista);
+        loja.clear();
+        loja.addAll(lista);
     }
     public TableView getTable() {
         return table;

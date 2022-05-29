@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LojasDAOimpl implements LojasDAO {
     private final static String JDBC_CLASS = "org.mariadb.jdbc.Driver";
-    private static final String JDBC_URL = "jdbc:mariadb://localhost:3307/lojasdb?allowMultiQueries=true";
+    private static final String JDBC_URL = "jdbc:mariadb://localhost:3307/lojabd?allowMultiQueries=true";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASS = "123456";
     private Connection con;
@@ -24,7 +24,7 @@ public class LojasDAOimpl implements LojasDAO {
 
     @Override
     public void inserir(Loja e) {
-        String sql = "INSERT INTO lojas (id, nome, data) ";
+        String sql = "INSERT INTO loja (id, nome, data) ";
         sql += " VALUES (0, ?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class LojasDAOimpl implements LojasDAO {
     @Override
     public List<Loja> consultar(String nome) {
         List<Loja> lista = new ArrayList<>();
-        String sql = "SELECT * FROM lojas WHERE nome LIKE '%" + nome + "%'";
+        String sql = "SELECT * FROM loja WHERE nome LIKE '%" + nome + "%'";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
