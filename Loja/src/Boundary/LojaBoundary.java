@@ -50,7 +50,7 @@ public class LojaBoundary extends Application {
 
         Scene scn = new Scene(principal, 300, 200);
         stage.setScene(scn);
-        stage.setTitle("Gestão de Lojas");
+        stage.setTitle("Lojas:");
         stage.show();
     }
 
