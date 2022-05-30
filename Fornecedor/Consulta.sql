@@ -1,3 +1,5 @@
+talvez seja necessário trocar o localhost:3307 para 3306;
+
 create database fornecedorbd;
 
 use fornecedorbd;
