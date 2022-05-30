@@ -1,4 +1,4 @@
-package DAO;
+package Persistence;
 
 import Entity.Fornecedor;
 
@@ -24,12 +24,15 @@ public class FornecedoresDAOimpl implements FornecedoresDAO {
 
     @Override
     public void inserir(Fornecedor e) {
-        String sql = "INSERT INTO fornecedor (id, nome, data) ";
-        sql += " VALUES (0, ?, ?)";
+        String sql = "INSERT INTO fornecedor (id, nome, prazo, produto, telefone, CNPJ) ";
+        sql += " VALUES (0, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, e.getNome());
-            stmt.setDate(2, java.sql.Date.valueOf(e.getData()));
+            stmt.setDate(2, java.sql.Date.valueOf(e.getPrazo()));
+            stmt.setString(3, e.getProduto());
+            stmt.setString(4, e.getTelefone());
+            stmt.setString(5, e.getCNPJ());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -46,7 +49,10 @@ public class FornecedoresDAOimpl implements FornecedoresDAO {
             while (rs.next()) {
                 Fornecedor fornecedor = new Fornecedor();
                 fornecedor.setNome(rs.getString("nome"));
-                fornecedor.setData(rs.getDate("data").toLocalDate());
+                fornecedor.setPrazo(rs.getDate("prazo").toLocalDate());
+                fornecedor.setProduto(rs.getString("produto"));
+                fornecedor.setTelefone(rs.getString("telefone"));
+                fornecedor.setCNPJ(rs.getString("CNPJ"));
                 lista.add(fornecedor);
             }
         } catch (SQLException e) {

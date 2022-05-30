@@ -17,8 +17,13 @@ import java.time.format.DateTimeFormatter;
 public class LojaBoundary extends Application {
     private TextField txtNome = new TextField();
     private TextField txtData = new TextField();
+    private TextField txtEndereco = new TextField();
+    private TextField txtTelefone = new TextField();
+    private TextField txtCNPJ = new TextField();
     private Button btnAdicionar = new Button("Adicionar");
     private Button btnPesquisar = new Button("Pesquisar");
+    private Button btnLimpar = new Button("Limpar");
+    private Button btnSair = new Button(" Sair ");
     private LojaControl control = new LojaControl();
 
     @Override
@@ -29,18 +34,29 @@ public class LojaBoundary extends Application {
 
         grid.add(new Label("Nome"), 0, 0);
         grid.add(txtNome, 1, 0);
-        grid.add(new Label("Data"), 0, 1);
+        grid.add(new Label("Data Cadastro"), 0, 1);
         grid.add(txtData, 1, 1);
-        grid.add(btnAdicionar, 0, 2);
-        grid.add(btnPesquisar, 1, 2);
+        grid.add(new Label("Endereço"), 0, 2);
+        grid.add(txtEndereco, 1, 2);
+        grid.add(new Label("Telefone"), 0, 3);
+        grid.add(txtTelefone, 1, 3);
+        grid.add(new Label("CNPJ"), 0, 4);
+        grid.add(txtCNPJ, 1, 4);
+        grid.add(btnAdicionar, 0, 5);
+        grid.add(btnPesquisar, 1, 5);
+        grid.add(btnLimpar, 2, 5);
+        grid.add(btnSair, 3, 5);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateStringConverter ldc =
                 new LocalDateStringConverter(formatter, null);
 
         Bindings.bindBidirectional(control.nomeProperty(), txtNome.textProperty());
-        Bindings.bindBidirectional(
-                txtData.textProperty(), control.dataProperty(), ldc);
+        Bindings.bindBidirectional(txtData.textProperty(), control.dataCadastroProperty(), ldc);
+        Bindings.bindBidirectional(control.enderecoProperty(), txtEndereco.textProperty());
+        Bindings.bindBidirectional(control.telefoneProperty(), txtTelefone.textProperty());
+        Bindings.bindBidirectional(control.CNPJProperty(), txtCNPJ.textProperty());
+
 
         principal.setCenter(control.getTable());
 
@@ -48,9 +64,19 @@ public class LojaBoundary extends Application {
 
         btnPesquisar.setOnAction(e -> control.pesquisar());
 
-        Scene scn = new Scene(principal, 300, 200);
+        btnSair.setOnAction(e -> System.exit(0));
+
+        btnLimpar.setOnAction(e -> {
+            txtNome.setText("");
+            txtData.setText("");
+            txtEndereco.setText("");
+            txtTelefone.setText("");
+            txtCNPJ.setText("");
+        });
+
+        Scene scn = new Scene(principal, 600, 400);
         stage.setScene(scn);
-        stage.setTitle("Lojas:");
+        stage.setTitle("Lojas: ");
         stage.show();
     }
 

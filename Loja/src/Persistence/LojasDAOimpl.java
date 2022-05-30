@@ -1,4 +1,4 @@
-package DAO;
+package Persistence;
 
 import Entity.Loja;
 
@@ -24,12 +24,15 @@ public class LojasDAOimpl implements LojasDAO {
 
     @Override
     public void inserir(Loja e) {
-        String sql = "INSERT INTO loja (id, nome, data) ";
-        sql += " VALUES (0, ?, ?)";
+        String sql = "INSERT INTO loja (id, nome, dataCadastro, endereco, telefone, CNPJ) ";
+        sql += " VALUES (0, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, e.getNome());
-            stmt.setDate(2, java.sql.Date.valueOf(e.getData()));
+            stmt.setDate(2, java.sql.Date.valueOf(e.getDataCadastro()));
+            stmt.setString(3, e.getEndereco());
+            stmt.setString(4, e.getTelefone());
+            stmt.setString(5, e.getCNPJ());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -46,7 +49,10 @@ public class LojasDAOimpl implements LojasDAO {
             while (rs.next()) {
                 Loja loja = new Loja();
                 loja.setNome(rs.getString("nome"));
-                loja.setData(rs.getDate("data").toLocalDate());
+                loja.setDataCadastro(rs.getDate("dataCadastro").toLocalDate());
+                loja.setEndereco(rs.getString("endereco"));
+                loja.setTelefone(rs.getString("telefone"));
+                loja.setCNPJ(rs.getString("CNPJ"));
                 lista.add(loja);
             }
         } catch (SQLException e) {
