@@ -4,7 +4,12 @@ create database lojabd;
 
 use lojabd;
 
-create table loja(id int, nome char(100), dataCadastro date, endereco char(150), telefone char(15)
-CNPJ char(20));
+create table loja(
+             id int primary key,
+             nome char(100) not null,
+             dataCadastro date not null,
+             endereco char(150) not null,
+             telefone char(15) not null,
+             CNPJ char(20) not null);
 
 select * from loja;

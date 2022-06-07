@@ -4,7 +4,12 @@ create database fornecedorbd;
 
 use fornecedorbd;
 
-create table fornecedor(id int, nome char(100), prazo date, produto char(150), telefone char(15)
-CNPJ char(20));
+create table fornecedor(
+             id int primary key,
+             nome char(100) not null,
+             prazo date not null,
+             produto char(150) not null,
+             telefone char(15) not null,
+             CNPJ char(20) not null);
 
 select * from fornecedor;
